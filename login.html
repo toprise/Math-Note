@@ -20,6 +20,7 @@
             line-height: 1.8;
             padding: 2rem;
         }
+
         .login-container {
             max-width: 400px;
             margin: 5rem auto;
@@ -48,23 +49,40 @@
             font-size: 1rem;
         }
 
-        .login-container button {
-            width: 100%;
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .button-group button {
+            flex: 1;
             padding: 12px;
-            background: linear-gradient(135deg, #4a90e2 0%, #6c5ce7 100%);
             border: none;
             border-radius: 8px;
             color: white;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 1rem;
         }
 
-        .login-container button:hover {
+        .button-group button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
+
+        .login-btn {
+            background: linear-gradient(135deg, #4a90e2 0%, #6c5ce7 100%);
+        }
+
+        .back-btn {
+            background: #6c757d;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+        }
+
         .dashboard-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -74,7 +92,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            display: none; /* 默认隐藏 */
+            display: none;
         }
 
         .dashboard-container h1 {
@@ -135,6 +153,7 @@
         .back-btn:hover {
             background: #357abd;
         }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -156,9 +175,12 @@
         <h1>Welcome to Math Notes</h1>
         <input type="text" id="username" placeholder="Username" required>
         <input type="password" id="password" placeholder="Password" required>
-        <button onclick="login()">Login</button>
-        <button class="back-btn" onclick="goBack()">Back to Home</button>
+        <div class="button-group">
+            <button class="login-btn" onclick="login()">Login</button>
+            <button class="back-btn" onclick="goBack()">Back to Home</button>
+        </div>
     </div>
+
     <div class="dashboard-container" id="dashboardContainer">
         <h1>Dashboard</h1>
         <div class="stats">
@@ -183,6 +205,7 @@
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+
             if (username === 'admin' && password === '123456') {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('dashboardContainer').style.display = 'block';
@@ -190,14 +213,16 @@
                 alert('Invalid username or password');
             }
         }
+
         function logout() {
             document.getElementById('dashboardContainer').style.display = 'none';
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
+
         function goBack() {
-            window.location.href = 'javascript:history.back(-1)';
+            window.location.href = 'index.html';
         }
     </script>
 </body>
