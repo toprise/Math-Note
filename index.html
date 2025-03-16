@@ -2,39 +2,149 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Math Note</title>
+        <title>Math Note | Knowledge Hub</title>
+        <!-- 引入 Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
         <style>
-            .Button{
-                background-color: skyblue;
-                border: none;
-                border-radius: 12px;
-                color: white;
-                padding: 15px 32px;
+            /* 基础重置 */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                min-height: 100vh;
+                font-family: 'Roboto', sans-serif;
+                padding: 2rem;
+            }
+
+            /* 标题样式 */
+            .title {
                 text-align: center;
-                text-decoration: none;
+                margin: 3rem 0;
+                opacity: 0;
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            .title b {
+                font-family: 'Poppins', sans-serif;
+                font-size: 2.8rem;
+                color: #2c3e50;
+                letter-spacing: 1.5px;
+                position: relative;
                 display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
+            }
+
+            .title b::after {
+                content: '';
+                display: block;
+                width: 60%;
+                height: 3px;
+                background: #3498db;
+                margin: 0.5rem auto 0;
+                border-radius: 2px;
+            }
+
+            /* 按钮容器 */
+            .button-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 2rem;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+                opacity: 0;
+                animation: fadeInUp 0.8s ease-out 0.3s forwards;
+            }
+
+            /* 按钮样式 */
+            .Button {
+                background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+                border: none;
+                border-radius: 16px;
+                color: white;
+                padding: 1.5rem 2.5rem;
+                font-size: 1.1rem;
                 cursor: pointer;
-                transition-duration: 0.4s;
-                -webkit-transition-duration: 0.4s;
+                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 
+                          0 1px 3px rgba(0, 0, 0, 0.08);
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.8rem;
             }
-            .Button:hover{
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, .24),
-                0 17px 50px 0 rgba(0, 0, 0, .19);
+
+            .Button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    120deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent
+                );
+                transition: 0.6s;
             }
-            a {
-                text-decoration: none;
+
+            .Button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
+                          0 3px 6px rgba(0, 0, 0, 0.08);
+            }
+
+            .Button:hover::before {
+                left: 100%;
+            }
+
+            /* 动画 */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 480px) {
+                .title b {
+                    font-size: 2rem;
+                }
+                
+                .Button {
+                    padding: 1.2rem 2rem;
+                    font-size: 1rem;
+                }
             }
         </style>
     </head>
     <body>
-        <p style="text-align:center;"><b>Math Note</b></p>
-        <br>
-        <br>
-        <div style="text-align:center">
-            <a href="Math/Math_List.html"><button class="Button">Math Knowledge</button></a>
-            <button class="Button">Informatics Knowledge</button>
+        <div class="title">
+            <b>Math Note</b>
+        </div>
+
+        <div class="button-container">
+            <a href="Math/Math_List.html">
+                <button class="Button">
+                    📘 Math Knowledge
+                </button>
+            </a>
+            <button class="Button" disabled>
+                🔍 Informatics Knowledge
+                <span style="font-size:0.8em; opacity:0.8">(Coming Soon)</span>
+            </button>
         </div>
     </body>
 </html>
