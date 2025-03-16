@@ -1,57 +1,182 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Math Note</title>
-        <style>
-            .Button{
-                background-color: skyblue;
-                border: none;
-                border-radius: 12px;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-                transition-duration: 0.4s;
-                -webkit-transition-duration: 0.4s;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Notes | Knowledge Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* 基础重置与全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            padding: 2rem;
+        }
+
+        /* 标题样式 */
+        .hero-header {
+            text-align: center;
+            margin: 4rem 0;
+            opacity: 0;
+            animation: slideIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90e2 0%, #6c5ce7 100%);
+            border-radius: 2px;
+        }
+
+        /* 卡片列表容器 */
+        .knowledge-grid {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        /* 卡片项样式 */
+        .knowledge-card {
+            background: white;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.05),
+                      0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .knowledge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #4a90e2 0%, #6c5ce7 100%);
+            transition: width 0.3s ease;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(50, 50, 93, 0.1),
+                      0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .knowledge-card:hover::before {
+            width: 8px;
+        }
+
+        .card-link {
+            display: block;
+            padding: 1.8rem 2rem;
+            color: #2c3e50;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        .card-title::before {
+            content: '📘';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        /* 返回按钮特殊样式 */
+        .back-card .card-title::before {
+            content: '🔙';
+        }
+
+        /* 动画效果 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
             }
-            .Button:hover{
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, .24),
-                0 17px 50px 0 rgba(0, 0, 0, .19);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            ul {
-                list-style: none;
-                padding: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
             }
 
-            li {
-                padding: 12px;
-                margin: 10px 0;
-                border: 2px solid #83aaf3;
-                border-radius: 8px;
-                transition: 0.3s;
+            .card-link {
+                padding: 1.5rem;
             }
 
-            li:hover {
-                background: #83aaf3;
-                color: white;
+            .card-title {
+                font-size: 1.2rem;
             }
-            a {
-                text-decoration: none;
-            }
-        </style>
-    </head>
-    <body>
-        <p style="text-align:center;"><b>Math Note</b></p>
-        <br>
-        <br>
-        <ul>
-            <a href="Discrete%20Mathematics/Discrete_Mathematics_List.html"><li>Discrete Mathematics</li></a>
-            <a href="javascript:history.back(-1)"><li>Back to the Previous Page</li></a>
-        </ul>
-    </body>
+        }
+    </style>
+</head>
+<body>
+    <header class="hero-header">
+        <h1 class="hero-title">Math Notes</h1>
+    </header>
+
+    <nav class="knowledge-grid">
+        <article class="knowledge-card">
+            <a href="Discrete%20Mathematics/Discrete_Mathematics_List.html" class="card-link">
+                <h2 class="card-title">Discrete Mathematics</h2>
+            </a>
+        </article>
+
+        <article class="knowledge-card back-card">
+            <a href="javascript:history.back()" class="card-link">
+                <h2 class="card-title">Back to Previous</h2>
+            </a>
+        </article>
+    </nav>
+</body>
 </html>
