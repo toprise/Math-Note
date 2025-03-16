@@ -3,24 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <title>Math Note | Knowledge Hub</title>
-        <!-- 引入 Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
         <style>
-            /* 基础重置 */
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
-
+            
+            a {
+	            text-decoration: none;
+	        }
             body {
                 background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
                 min-height: 100vh;
                 font-family: 'Roboto', sans-serif;
                 padding: 2rem;
             }
-
-            /* 标题样式 */
             .title {
                 text-align: center;
                 margin: 3rem 0;
@@ -46,8 +45,6 @@
                 margin: 0.5rem auto 0;
                 border-radius: 2px;
             }
-
-            /* 按钮容器 */
             .button-container {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -58,8 +55,6 @@
                 opacity: 0;
                 animation: fadeInUp 0.8s ease-out 0.3s forwards;
             }
-
-            /* 按钮样式 */
             .Button {
                 background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
                 border: none;
@@ -104,8 +99,6 @@
             .Button:hover::before {
                 left: 100%;
             }
-
-            /* 动画 */
             @keyframes fadeInUp {
                 from {
                     opacity: 0;
@@ -117,7 +110,6 @@
                 }
             }
 
-            /* 响应式设计 */
             @media (max-width: 480px) {
                 .title b {
                     font-size: 2rem;
