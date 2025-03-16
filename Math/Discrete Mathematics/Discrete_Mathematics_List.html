@@ -1,57 +1,199 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Math Note</title>
-        <style>
-            .Button{
-                background-color: skyblue;
-                border: none;
-                border-radius: 12px;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-                transition-duration: 0.4s;
-                -webkit-transition-duration: 0.4s;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Notes | Knowledge Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+        }
+
+        /* 标题样式 */
+        .page-header {
+            text-align: center;
+            margin: 4rem 0;
+            opacity: 0;
+            animation: floatIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+            padding: 0 2rem;
+            background: linear-gradient(90deg, #4a90e2 0%, #6c5ce7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(74, 144, 226, 0.2));
+        }
+
+        /* 卡片容器 */
+        .card-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            opacity: 0;
+            animation: cardAppear 0.8s ease-out 0.3s forwards;
+        }
+
+        /* 知识卡片 */
+        .knowledge-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.05),
+                      0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .knowledge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, 
+                rgba(74, 144, 226, 0.1) 0%,
+                rgba(108, 92, 231, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(50, 50, 93, 0.1),
+                     0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .knowledge-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-link {
+            display: block;
+            padding: 1.8rem 2rem;
+            color: #2c3e50;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4a90e2 0%, #6c5ce7 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .card-text {
+            font-weight: 600;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        /* 返回按钮特殊样式 */
+        .back-card .card-icon {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+        }
+
+        /* 动画效果 */
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            .Button:hover{
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, .24),
-                0 17px 50px 0 rgba(0, 0, 0, .19);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            ul {
-                list-style: none;
-                padding: 0;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+                padding: 0 1rem;
             }
 
-            li {
-                padding: 12px;
-                margin: 10px 0;
-                border: 2px solid #83aaf3;
-                border-radius: 8px;
-                transition: 0.3s;
+            .card-link {
+                padding: 1.2rem;
             }
 
-            li:hover {
-                background: #83aaf3;
-                color: white;
+            .card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
-            a {
-                text-decoration: none;
+
+            .card-text {
+                font-size: 1rem;
             }
-        </style>
-    </head>
-    <body>
-        <p style="text-align:center;"><b>Math Note</b></p>
-        <br>
-        <br>
-        <ul>
-            <a href="One_About_Discrete_Mathematics.html"><li>1. About Discrete Mathematics</li></a>
-            <a href="javascript:history.back(-1)"><li>Back to the Previous Page</li></a>
-        </ul>
-    </body>
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1 class="page-title">Math Notes</h1>
+    </header>
+
+    <main class="card-container">
+        <article class="knowledge-card">
+            <a href="One_About_Discrete_Mathematics.html" class="card-link">
+                <div class="card-content">
+                    <div class="card-icon">📚</div>
+                    <span class="card-text">About Discrete Mathematics</span>
+                </div>
+            </a>
+        </article>
+
+        <article class="knowledge-card back-card">
+            <a href="javascript:history.back()" class="card-link">
+                <div class="card-content">
+                    <div class="card-icon">↩️</div>
+                    <span class="card-text">Back to Previous</span>
+                </div>
+            </a>
+        </article>
+    </main>
+</body>
 </html>
